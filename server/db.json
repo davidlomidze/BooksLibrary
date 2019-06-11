@@ -1,0 +1,39 @@
+{
+    "books": [
+        {
+            "id": 1,
+            "title": "Some book 1",
+            "author": "David Lomidze",
+            "cover": null,
+            "date": "2019-06-11 20:00:00"
+        },
+        {
+            "id": 2,
+            "title": "War And Peace",
+            "author": "Leo Tolstoy",
+            "cover": "http://localhost:8080/images/1.jpg",
+            "date": "2019-06-10 22:00:00"
+        },
+        {
+            "id": 3,
+            "title": "The Knight in the Panther's Skin",
+            "author": "Shota Rustaveli",
+            "cover": "http://localhost:8080/images/2.png",
+            "date": "2019-06-10 22:00:00"
+        },
+        {
+            "id": 4,
+            "title": "The Master And Margarita",
+            "author": "Mikhail Bulgakov",
+            "cover": "http://localhost:8080/images/3.jpg",
+            "date": "2019-06-10 22:00:00"
+        },
+        {
+            "id": 5,
+            "title": "The Headless Horseman",
+            "author": "Mayne Reid",
+            "cover": "http://localhost:8080/images/4.jpg",
+            "date": "2019-06-10 22:00:00"
+        }
+    ]
+}
