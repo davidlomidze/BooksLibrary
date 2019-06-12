@@ -13,7 +13,9 @@ Note: Use latest nodejs (version 12.3.1+) with npm version of 6.8.0+
 
 ### `http-server ./server --a=localhost --cors=Access-Control-Allow-Origin`
 
-Note: http-server should run in `./server` directory with address `--a=localhost` and disabled cors `--cors=Access-Control-Allow-Origin`.
+Note: 
+* You also might need to install http-server globally: `npm install http-server -g`. 
+* http-server should run in `./server` directory with address `--a=localhost` and disabled cors `--cors=Access-Control-Allow-Origin`.
 So that http-server should be available on `http://localhost:8080`
 
 ## Then start React
