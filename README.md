@@ -1,10 +1,10 @@
-
+![Screenshot](screenshot.png)
 
 # Getting started
 
 To run this application correctly you must run next commands in project directory:
 
-## First install npm
+## First install node_modules
 `npm install` or `yarn install`
 
 Note: Use latest nodejs (version 12.3.1+) with npm version of 6.8.0+
