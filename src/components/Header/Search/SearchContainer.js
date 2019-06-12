@@ -6,7 +6,7 @@ import * as bookSelector from "../../../store/book/selectors";
 
 const mapStateToProps = state => {
     return {
-        searchValue: bookSelector.selectsearchValue(state.book)
+        searchValue: bookSelector.selectSearchValue(state.book)
     }
 }
 

@@ -2,46 +2,76 @@ import * as actionTypes from "./actionTypes";
 import axios from "../../utils/axios";
 import * as requests from "../../utils/constants/requests";
 import Book from "../../models/Book";
+import * as helpers from "../../utils/helpers";
 
 export const setBooks = books => {
     return {
         type: actionTypes.SET_BOOKS,
-        books,
+        books
     }
 }
 
 export const addBook = book => {
     return {
         type: actionTypes.ADD_BOOK,
-        book,
+        book
     }
 }
 
 export const replaceBook = book => {
     return {
         type: actionTypes.REPLACE_BOOK,
-        book,
+        book
     }
 }
 
 export const removeBook = book => {
     return {
         type: actionTypes.REMOVE_BOOK,
-        book,
+        book
     }
 }
 
 export const setFetching = fetching => {
     return {
         type: actionTypes.SET_FETCHING,
-        fetching,
+        fetching
+    }
+}
+
+export const setShowCreateBookModal = show => {
+    return {
+        type: actionTypes.SET_SHOW_CREATE_BOOK_MODAL,
+        show
+    }
+}
+
+export const setShowEditBookModal = (show, bookId) => {
+    return {
+        type: actionTypes.SET_SHOW_EDIT_BOOK_MODAL,
+        show,
+        bookId
     }
 }
 
 export const setSearchValue = searchValue => {
     return {
         type: actionTypes.SET_SEARCH_VALUE,
-        searchValue,
+        searchValue
+    }
+}
+
+export const invalidate = errorMessage => {
+    return {
+        type: actionTypes.INVALIDATE,
+        errorMessage
+    }
+}
+
+export const setDeletingBookId = (bookId) => {
+    return {
+        type: actionTypes.SET_DELETING_BOOK_ID,
+        bookId
     }
 }
 
@@ -60,9 +90,9 @@ export const fetchBooks = () => {
                 dispatch(setBooks(books));
 
             })
-            .finally(() => {
+            .catch(error => {
 
-                dispatch(setFetching(false));
+                dispatch(invalidate("Couldn't fetch books. Check http-server availability"));
 
             });
 
@@ -72,18 +102,92 @@ export const fetchBooks = () => {
 export const updateBook = (id, formData) => {
     return dispatch => {
 
-        // TODO: dispatch(showGlobalLoader());
+        const book = new Book(formData);
 
-        // return axios.post(requests.UPDATE_BOOK.replace("{id}", id), formData)
-        //     .then(response => {
-        //
-        //         const menu = new Menu(response.data.menu);
-        //
-        //         // then dispatch
-        //         dispatch(replaceMenu(menu));
-        //
-        //         return menu;
-        //     });
+        // check book title availability
+        const titleAvailable = helpers.checkBookTitleAvailability(book);
+
+        /**
+         * Make fake promise, like it was an API call
+         */
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+
+                if(titleAvailable) {
+
+                    dispatch(replaceBook(book));
+
+                    resolve();
+
+                } else {
+
+                    reject("Book with such title already exists!");
+
+                }
+
+            }, 500);
+        });
+
+    }
+}
+
+export const storeBook = (formData) => {
+    return dispatch => {
+
+        // find books next incremental id
+        const nextId = helpers.findBooksNextId();
+
+        // copy form data
+        let bookData = {...formData};
+
+        // add id to book payload
+        bookData.id = nextId;
+
+        // then initialize book entity model
+        const book = new Book(bookData);
+
+        // check book title availability
+        const titleAvailable = helpers.checkBookTitleAvailability(book);
+
+        /**
+         * Make fake promise, like it was an API call
+         */
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+
+                if(titleAvailable) {
+
+                    dispatch(addBook(book));
+
+                    resolve();
+
+                } else {
+
+                    reject("Book with such title already exists!");
+
+                }
+
+            }, 500);
+        });
+
+    }
+}
+
+export const deleteBook = (book) => {
+    return dispatch => {
+
+        /**
+         * Make fake promise, like it was an API call
+         */
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+
+                dispatch(removeBook(book));
+
+                resolve();
+
+            }, 500);
+        });
 
     }
 }

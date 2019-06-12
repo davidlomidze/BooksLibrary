@@ -1,6 +1,10 @@
 import React, {Component} from "react";
-import Card from "./Card/Card";
+import Card from "./Card/CardContainer";
 import EmptyResultsMessage from "./EmptyResultsMessage/EmptyResultsMessage";
+import ErrorMessage from "./ErrorMessage/ErrorMessageContainer";
+import Loading from "./Loading/Loading";
+import UpsertBookModal from "../../UpsertBookModal/UpsertBookModalContainer";
+import DeleteBookModal from "../../DeleteBookModal/DeleteBookModalContainer";
 
 class Books extends Component {
 
@@ -10,9 +14,21 @@ class Books extends Component {
 
     }
 
+    newBookButtonClickHandler = () => {
+
+        this.props.bookActions.setShowCreateBookModal(true);
+
+    }
+
     render() {
 
-        const { isFetching, books } = this.props;
+        const {
+            isFetching,
+            books,
+            didInvalidate,
+            showUpsertBookModal,
+            deletingBook
+        } = this.props;
 
         return (
             <div className="container pt-5">
@@ -21,13 +37,32 @@ class Books extends Component {
 
                     <h1 className="h3">Books</h1>
 
-                    <button type="button" className="btn btn-sm btn-primary rounded-pill px-3">
+                    <button
+                        type="button"
+                        className="btn btn-sm btn-primary rounded-pill px-3"
+                        onClick={this.newBookButtonClickHandler}
+                    >
                         New Book
                     </button>
 
                 </div>
 
                 <div className="row">
+
+                    {
+                        isFetching &&
+                        <Loading />
+                    }
+
+                    {
+                        !isFetching && didInvalidate &&
+                        <ErrorMessage />
+                    }
+
+                    {
+                        books && !books.length &&
+                        <EmptyResultsMessage />
+                    }
 
                     {
                         books && books.map(book => (
@@ -40,13 +75,13 @@ class Books extends Component {
                     }
 
                     {
-                        books && !books.length &&
-                        <EmptyResultsMessage />
+                        showUpsertBookModal &&
+                        <UpsertBookModal />
                     }
 
                     {
-                        isFetching &&
-                        <p>Loading...</p>
+                        deletingBook &&
+                        <DeleteBookModal />
                     }
 
                 </div>

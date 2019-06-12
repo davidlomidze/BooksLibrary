@@ -1,0 +1,17 @@
+.customModalContent {
+    box-shadow: 0 10px 20px rgba(0,0,0, 0.15) !important;
+    border: none !important;
+}
+
+.customModalHeader {
+    padding: 0.6rem 1rem !important;
+    border: none !important;
+}
+
+.customModalFooter {
+    border: none !important;
+}
+
+.modal-backdrop.show {
+    opacity: 0.35 !important;
+}

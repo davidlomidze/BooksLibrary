@@ -1,15 +1,31 @@
 import {displayBookDate} from "../../utils/helpers";
 
-export const selectBooks = state => {
-    return state.list;
-}
-
 export const selectIsFetching = state => {
     return state.isFetching;
 }
 
-export const selectsearchValue = state => {
+export const selectDidInvalidate = state => {
+    return state.didInvalidate;
+}
+
+export const selectErrorMessage = state => {
+    return state.errorMessage;
+}
+
+export const selectSearchValue = state => {
     return state.searchValue;
+}
+
+export const selectShowUpsertBookModal = state => {
+    return state.showUpsertBookModal;
+}
+
+export const selectEditingBook = state => {
+    return state.list.find(book => book.id === state.editingBookId);
+}
+
+export const selectDeletingBook = state => {
+    return (state.list && state.list.find(book => book.id === state.deletingBookId)) || null;
 }
 
 export const selectFilteredBooks = state => {

@@ -8,7 +8,7 @@ class AppLayout extends Component {
 
     render() {
         return (
-            <div className="w-100 bg-light">
+            <div className="w-100">
 
                 <Header/>
 

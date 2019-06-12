@@ -2,9 +2,9 @@
     "books": [
         {
             "id": 1,
-            "title": "Some book 1",
-            "author": "David Lomidze",
-            "cover": null,
+            "title": "Madame Bovary",
+            "author": "Gustave Flaubert",
+            "cover": "http://localhost:8080/images/5.jpg",
             "date": "2019-06-11 20:00:00"
         },
         {

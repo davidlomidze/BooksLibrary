@@ -6,7 +6,7 @@ const Footer = props => {
             <div className="container">
                 <div className="navbar navbar-light py-5 border-top">
                     <small className="mb-0 mx-auto text-secondary">
-                        Copytight 2019 David Lomidze
+                        Copyright 2019 David Lomidze
                     </small>
                 </div>
             </div>

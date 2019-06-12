@@ -7,6 +7,9 @@ import * as bookSelector from "../../../store/book/selectors";
 const mapStateToProps = state => {
     return {
         isFetching: bookSelector.selectIsFetching(state.book),
+        didInvalidate: bookSelector.selectDidInvalidate(state.book),
+        showUpsertBookModal: bookSelector.selectShowUpsertBookModal(state.book),
+        deletingBook: bookSelector.selectDeletingBook(state.book),
         books: bookSelector.selectFilteredBooks(state.book)
     }
 }
